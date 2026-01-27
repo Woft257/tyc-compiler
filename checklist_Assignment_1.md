@@ -111,10 +111,10 @@
 - [x] `ERROR_TOKEN` cases.
 
 ### 4.2 `test_parser.py`
-- [ ] Program có struct + funcs.
-- [ ] Mỗi statement type có ít nhất 1 test.
-- [ ] Precedence tests (ví dụ `a+b*c`, `a==b||c==d`, `a.b.c`, unary chains).
-- [ ] Negative tests: syntax error đúng vị trí.
+- [x] Program có struct + funcs.
+- [x] Mỗi statement type có ít nhất 1 test.
+- [x] Precedence tests (ví dụ `a+b*c`, `a==b||c==d`, `a.b.c`, unary chains).
+- [x] Negative tests: syntax error đúng vị trí.
 
 ---
 
