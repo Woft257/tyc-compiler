@@ -24,7 +24,154 @@ options{
 	language=Python3;
 }
 
-program: EOF;
+// Parser rules (Assignment 1)
+
+program: decl* EOF;
+
+decl: structDecl | funcDecl;
+
+funcDecl
+	: type? ID LPAREN paramList? RPAREN blockStmt
+	;
+
+paramList: param (COMMA param)*;
+param: type ID;
+
+structDecl
+	: STRUCT ID LBRACE fieldDecl* RBRACE SEMI
+	;
+
+fieldDecl: type ID SEMI;
+
+type: INT | FLOAT | STRING | VOID | ID;
+
+blockStmt: LBRACE (varDeclStmt | stmt)* RBRACE;
+
+varDeclStmt
+	: AUTO ID (ASSIGN expr)? SEMI
+	| type ID (ASSIGN expr)? SEMI
+	;
+
+stmt
+	: blockStmt
+	| ifStmt
+	| whileStmt
+	| forStmt
+	| switchStmt
+	| BREAK SEMI
+	| CONTINUE SEMI
+	| returnStmt
+	| expr SEMI
+	;
+
+ifStmt
+	: IF LPAREN expr RPAREN stmt (ELSE stmt)?
+	;
+
+whileStmt
+	: WHILE LPAREN expr RPAREN stmt
+	;
+
+forStmt
+	: FOR LPAREN forInit? SEMI expr? SEMI forUpdate? RPAREN stmt
+	;
+
+forInit
+	: varDeclFor
+	| assignmentExpr
+	;
+
+varDeclFor
+	: AUTO ID (ASSIGN expr)?
+	| type ID (ASSIGN expr)?
+	;
+
+forUpdate
+	: assignmentExpr
+	| incDecExpr
+	;
+
+switchStmt
+	: SWITCH LPAREN expr RPAREN LBRACE switchItem* RBRACE
+	;
+
+switchItem
+	: CASE expr COLON (varDeclStmt | stmt)*
+	| DEFAULT COLON (varDeclStmt | stmt)*
+	;
+
+returnStmt
+	: RETURN expr? SEMI
+	;
+
+// Expressions (precedence per spec)
+expr: assignmentExpr;
+
+assignmentExpr
+	: logicalOrExpr (ASSIGN assignmentExpr)?
+	;
+
+logicalOrExpr
+	: logicalAndExpr (OR logicalAndExpr)*
+	;
+
+logicalAndExpr
+	: equalityExpr (AND equalityExpr)*
+	;
+
+equalityExpr
+	: relationalExpr ((EQ | NEQ) relationalExpr)*
+	;
+
+relationalExpr
+	: additiveExpr ((LT | LE | GT | GE) additiveExpr)*
+	;
+
+additiveExpr
+	: multiplicativeExpr ((PLUS | MINUS) multiplicativeExpr)*
+	;
+
+multiplicativeExpr
+	: unaryExpr ((MUL | DIV | MOD) unaryExpr)*
+	;
+
+unaryExpr
+	: (INC | DEC) unaryExpr
+	| (NOT | PLUS | MINUS) unaryExpr
+	| postfixExpr
+	;
+
+postfixExpr
+	: primaryExpr postfixSuffix*
+	;
+
+postfixSuffix
+	: DOT ID
+	| INC
+	| DEC
+	;
+
+primaryExpr
+	: ID callSuffix?
+	| literal
+	| LPAREN expr RPAREN
+	;
+
+callSuffix: LPAREN argList? RPAREN;
+argList: expr (COMMA expr)*;
+
+incDecExpr
+	: (INC | DEC) primaryLValue
+	| primaryLValue (INC | DEC)
+	;
+
+primaryLValue
+	: ID (DOT ID)*
+	;
+
+literal: INT_LIT | FLOAT_LIT | STRING_LIT;
+
+
 
 AUTO: 'auto';
 BREAK: 'break';

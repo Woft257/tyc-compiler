@@ -66,7 +66,7 @@
 ## 3) TyC.g4 — Parser rules (Syntax)
 
 ### 3.1 Program structure
-- [ ] Program gồm danh sách `struct` declarations và function declarations.
+- [x] Program gồm danh sách `struct` declarations và function declarations.
 
 ### 3.2 Declarations
 - [ ] Struct declaration.
