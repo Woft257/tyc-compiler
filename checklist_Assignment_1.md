@@ -69,30 +69,30 @@
 - [x] Program gồm danh sách `struct` declarations và function declarations.
 
 ### 3.2 Declarations
-- [ ] Struct declaration.
-- [ ] Function declaration: return type + name + params + body.
-- [ ] Variable declaration (đặc biệt `auto`).
+- [x] Struct declaration.
+- [x] Function declaration: return type + name + params + body.
+- [x] Variable declaration (đặc biệt `auto`).
 
 ### 3.3 Statements
-- [ ] Block `{ ... }`.
-- [ ] If / else.
-- [ ] While.
-- [ ] For.
-- [ ] Switch / case / default.
-- [ ] Break / continue.
-- [ ] Return.
-- [ ] Expression statement / assignment statement.
+- [x] Block `{ ... }`.
+- [x] If / else.
+- [x] While.
+- [x] For.
+- [x] Switch / case / default.
+- [x] Break / continue.
+- [x] Return.
+- [x] Expression statement / assignment statement.
 
 ### 3.4 Expressions + precedence (phải đúng)
-- [ ] Member access `.`
-- [ ] Unary: `!`, unary `+/-`, `++/--`.
-- [ ] `* / %`
-- [ ] `+ -`
-- [ ] `< <= > >=`
-- [ ] `== !=`
-- [ ] `&&`
-- [ ] `||`
-- [ ] Assignment `=` (thường right-assoc)
+- [x] Member access `.`
+- [x] Unary: `!`, unary `+/-`, `++/--`.
+- [x] `* / %`
+- [x] `+ -`
+- [x] `< <= > >=`
+- [x] `== !=`
+- [x] `&&`
+- [x] `||`
+- [x] Assignment `=` (thường right-assoc)
 
 ---
 
