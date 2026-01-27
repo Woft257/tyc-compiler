@@ -242,7 +242,14 @@ ILLEGAL_ESCAPE:
 
 UNCLOSE_STRING:
 	'"' (STR_CHAR)* ( '\r'? '\n' | '\r' | EOF )
-	{self.text = self.text[1:-1] if self.text.endswith('\n') or self.text.endswith('\r') else self.text[1:]}
+	{
+		if self.text.endswith('\r\n'):
+			self.text = self.text[1:-2]
+		elif self.text.endswith('\n') or self.text.endswith('\r'):
+			self.text = self.text[1:-1]
+		else:
+			self.text = self.text[1:]
+	}
 	;
 
 STRING_LIT:
