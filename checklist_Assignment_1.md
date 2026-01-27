@@ -99,16 +99,16 @@
 ## 4) Tests
 
 ### 4.1 `test_lexer.py`
-- [ ] Keywords không bị lex thành `ID`.
-- [ ] `ID` edge cases: `_`, `_a9`, `a_b2`.
-- [ ] Operators ưu tiên token dài: `==` vs `=`; `<=` vs `<`; `++` vs `+`.
-- [ ] Separators.
-- [ ] Integer/float cases (đặc biệt `1.` và `.5`).
-- [ ] Comments bị skip.
-- [ ] Strings hợp lệ (strip quotes).
-- [ ] `ILLEGAL_ESCAPE` cases.
-- [ ] `UNCLOSE_STRING` cases (EOF, newline, carriage return).
-- [ ] `ERROR_TOKEN` cases.
+- [x] Keywords không bị lex thành `ID`.
+- [x] `ID` edge cases: `_`, `_a9`, `a_b2`.
+- [x] Operators ưu tiên token dài: `==` vs `=`; `<=` vs `<`; `++` vs `+`.
+- [x] Separators.
+- [x] Integer/float cases (đặc biệt `1.` và `.5`).
+- [x] Comments bị skip.
+- [x] Strings hợp lệ (strip quotes).
+- [x] `ILLEGAL_ESCAPE` cases.
+- [x] `UNCLOSE_STRING` cases (EOF, newline, carriage return).
+- [x] `ERROR_TOKEN` cases.
 
 ### 4.2 `test_parser.py`
 - [ ] Program có struct + funcs.
