@@ -311,7 +311,12 @@ class StaticChecker(ASTVisitor):
         lhs_unresolved = isinstance(lhs_type, UnresolvedAuto)
         rhs_unresolved = isinstance(rhs_type, UnresolvedAuto)
         if lhs_unresolved and rhs_unresolved:
-            raise TypeCannotBeInferred(ae)
+            if isinstance(ae.lhs, Identifier):
+                raise TypeCannotBeInferred(ae.lhs)
+            elif isinstance(ae.rhs, Identifier):
+                raise TypeCannotBeInferred(ae.rhs)
+            else:
+                raise TypeCannotBeInferred(ae)
         if lhs_unresolved:
             self._resolve_auto_var(ae.lhs, rhs_type)
             lhs_type = rhs_type
@@ -379,9 +384,6 @@ class StaticChecker(ASTVisitor):
             raise TypeCannotBeInferred(ae_rhs)
 
         if not self.types_compatible(lhs_type, rhs_type):
-            import sys
-            sys.stdout.write(f"DEBUG_ASSIGN: lhs_type={type(lhs_type).__name__}({lhs_type!r}) rhs_type={type(rhs_type).__name__}({rhs_type!r}) compat={self.types_compatible(lhs_type, rhs_type)}\n")
-            sys.stdout.flush()
             raise TypeMismatchInStatement(node)
 
     def visit_expr_stmt(self, node: "ExprStmt", o: Any = None) -> None:
@@ -397,13 +399,7 @@ class StaticChecker(ASTVisitor):
         left_unresolved = isinstance(left_type, UnresolvedAuto)
         right_unresolved = isinstance(right_type, UnresolvedAuto)
         if left_unresolved and right_unresolved:
-            # Report on the Identifier, not the BinaryOp
-            if isinstance(node.left, Identifier):
-                raise TypeCannotBeInferred(node.left)
-            elif isinstance(node.right, Identifier):
-                raise TypeCannotBeInferred(node.right)
-            else:
-                raise TypeCannotBeInferred(node)
+            raise TypeCannotBeInferred(node)
         if left_unresolved:
             self._resolve_auto_var_from_unresolved(left_type, right_type)
             left_type = right_type
